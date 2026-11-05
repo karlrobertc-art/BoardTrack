@@ -1,0 +1,12 @@
+<%- include('_head') %>
+<div class="card login-box">
+  <h1>BoardTrack</h1>
+  <p class="sub">Boarding house &amp; rental management</p>
+  <form method="post" action="/login">
+    <label>Username</label><input name="username" required autofocus>
+    <label>Password</label><input name="password" type="password" required>
+    <button>Log in</button>
+  </form>
+  <p class="hint">Demo accounts are listed in the README.</p>
+</div>
+<%- include('_foot') %>

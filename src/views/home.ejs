@@ -1,0 +1,15 @@
+<%- include('_head') %>
+<div class="page-head"><div><h1>Dashboard</h1><p class="sub">Signed in as <%= user.username %> (<%= user.role %>)</p></div></div>
+<% if (stats) { const peso = n => '₱' + Number(n).toLocaleString('en-PH', { minimumFractionDigits: 2 }); %>
+<div class="stats">
+  <div class="card stat"><div class="label">Properties</div><div class="value"><%= stats.properties %></div></div>
+  <div class="card stat"><div class="label">Occupied rooms</div><div class="value"><%= stats.occupied %></div></div>
+  <div class="card stat"><div class="label">Available rooms</div><div class="value"><%= stats.available %></div></div>
+  <div class="card stat"><div class="label">Active leases</div><div class="value"><%= stats.active_leases %></div></div>
+  <div class="card stat"><div class="label">Rent collected</div><div class="value"><%= peso(stats.collected) %></div></div>
+  <div class="card stat"><div class="label">Unpaid utilities</div><div class="value"><%= peso(stats.unpaid_utilities) %></div></div>
+</div>
+<% } else { %>
+<div class="card empty">Use the menu above to view your lease, payments, and utility bills.</div>
+<% } %>
+<%- include('_foot') %>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BoardTrack</title><link rel="stylesheet" href="/style.css">
+</head><body>
+<% if (user) { %>
+<header class="topbar">
+  <a class="brand" href="/">BoardTrack</a>
+  <nav>
+    <a href="/">Dashboard</a>
+    <% menu.forEach(m => { %>
+      <a href="/<%= m.key %>" class="<%= typeof page !== 'undefined' && page.key === m.key ? 'active' : '' %>"><%= m.label %></a>
+    <% }) %>
+  </nav>
+  <div class="who"><span><%= user.username %> · <%= user.role %></span>
+    <form method="post" action="/logout"><button class="ghost">Log out</button></form></div>
+</header>
+<% } %>
+<main>
+<% if (flash && flash.err) { %><div class="msg err"><%= flash.err %></div><% } %>
+<% if (flash && flash.ok)  { %><div class="msg ok"><%= flash.ok %></div><% } %>

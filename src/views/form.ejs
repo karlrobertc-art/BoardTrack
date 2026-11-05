@@ -1,0 +1,18 @@
+<%- include('_head') %>
+<div class="page-head"><h1><%= row[page.pk] ? 'Edit' : 'Add' %> · <%= page.label %></h1></div>
+<form method="post" action="<%= action %>" class="card form-card">
+  <% page.fields.forEach(f => { const val = row[f.n] ?? ''; %>
+    <label><%= f.n.replace(/_id$/, '').replace(/_/g, ' ') %> <% if (f.opt) { %><small>(optional)</small><% } %></label>
+    <% if (f.fk) { %>
+      <select name="<%= f.n %>" <%= f.opt ? '' : 'required' %>><option value="">Choose…</option>
+        <% dropdowns[f.n].forEach(o => { %><option value="<%= o.v %>" <%= String(o.v) === String(val) ? 'selected' : '' %>><%= o.l %></option><% }) %>
+      </select>
+    <% } else if (f.opts) { %>
+      <select name="<%= f.n %>"><% f.opts.forEach(o => { %><option <%= o === val ? 'selected' : '' %>><%= o %></option><% }) %></select>
+    <% } else { %>
+      <input name="<%= f.n %>" type="<%= f.t || 'text' %>" <%= f.t === 'number' ? 'step=0.01 min=0' : '' %> value="<%= val %>" <%= f.opt ? '' : 'required' %>>
+    <% } %>
+  <% }) %>
+  <div class="form-actions"><button>Save</button><a class="btn ghost" href="/<%= page.key %>">Cancel</a></div>
+</form>
+<%- include('_foot') %>
