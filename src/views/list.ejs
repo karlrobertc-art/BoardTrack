@@ -1,0 +1,36 @@
+<%- include('_head') %>
+<%
+  const perms = locals.perms || '';
+  const hidden = [page.pk, 'tenant_id'];                       // helper columns not worth showing
+  const money = ['amount', 'monthly_rate', 'monthly_rent', 'total_paid', 'utilities_billed'];
+  const cols = rows.length ? Object.keys(rows[0]).filter(c => !hidden.includes(c)) : [];
+%>
+<div class="page-head">
+  <div><h1><%= page.label %></h1><p class="sub"><%= rows.length %> record<%= rows.length === 1 ? '' : 's' %></p></div>
+  <% if (perms.includes('c')) { %><a class="btn" href="/<%= page.key %>/new">+ Add new</a><% } %>
+</div>
+<div class="card table-wrap">
+<% if (!rows.length) { %><div class="empty">No records yet.</div><% } else { %>
+<table>
+  <thead><tr>
+    <% cols.forEach(c => { %><th class="<%= money.includes(c) ? 'num' : '' %>"><%= c.replace(/_id$/, ' #').replace(/_/g, ' ') %></th><% }) %>
+    <% if (perms.includes('u') || perms.includes('d')) { %><th></th><% } %>
+  </tr></thead>
+  <tbody>
+  <% rows.forEach(r => { %><tr>
+    <% cols.forEach(c => { const v = r[c]; %>
+      <% if (v === null) { %><td></td>
+      <% } else if (c === 'status') { %><td><span class="badge <%= String(v).toLowerCase() %>"><%= v %></span></td>
+      <% } else if (money.includes(c)) { %><td class="num">₱<%= Number(v).toLocaleString('en-PH', { minimumFractionDigits: 2 }) %></td>
+      <% } else { %><td><%= v %></td><% } %>
+    <% }) %>
+    <% if (perms.includes('u') || perms.includes('d')) { %><td class="actions">
+      <% if (perms.includes('u')) { %><a href="/<%= page.key %>/<%= r[page.pk] %>/edit">Edit</a><% } %>
+      <% if (perms.includes('d')) { %><form method="post" action="/<%= page.key %>/<%= r[page.pk] %>/delete" style="display:inline" onsubmit="return confirm('Delete this record?')"><button class="link">Delete</button></form><% } %>
+    </td><% } %>
+  </tr><% }) %>
+  </tbody>
+</table>
+<% } %>
+</div>
+<%- include('_foot') %>
