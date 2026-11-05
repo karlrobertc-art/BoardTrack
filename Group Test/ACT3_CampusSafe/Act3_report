@@ -1,0 +1,23 @@
+Activity 3 — CampusSafe System Installation and Testing Report
+
+Overall Status: Passed  
+Testing Date: November 5, 2026  
+Testing Environment: Windows   
+Project Source: `grp07-campussafe-main.zip`  
+
+Installation and Environment Verification
+
+The CampusSafe application was extracted from the provided project archive and tested in a separate local environment. The installation and execution process was conducted using a disposable project copy and an isolated PostgreSQL database to prevent changes to the original development environment.
+
+The system was evaluated based on PHP syntax validation, database connectivity, database installation, application execution, and basic user functionality.
+
+Setup Notes and Technical Observations
+
+During the installation process, the testing environment required additional PHP configuration. The PHP installation was located in `C:\xampp2`, which was not included in the executable paths checked by the provided `start.bat` and `setup.bat` scripts. Additionally, the PostgreSQL PDO driver was not enabled in the default PHP module configuration. The required PostgreSQL extension DLLs were enabled specifically for the testing process, and the application was launched using the identified PHP executable. Although the application executed successfully after the required environment configuration, the supplied launcher scripts did not operate automatically in the tested environment. This observation identifies a deployment configuration concern rather than a failure of the application's tested functionality.
+
+
+ Conclusion
+
+The CampusSafe application successfully completed the documented local installation and functional testing procedures after the required PHP and PostgreSQL environment settings were configured. The system demonstrated successful database initialization, application execution, user authentication, and hazard-report submission. The testing results indicate that the application can operate in a separate local environment when its required software prerequisites are properly configured.
+
+The remaining deployment consideration is the compatibility of the bundled launcher scripts with PHP installations located outside their predefined paths. Addressing this issue would improve the application's portability and simplify installation for other groups.
