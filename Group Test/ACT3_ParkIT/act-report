@@ -1,0 +1,11 @@
+Activity 3 — Park-It Installation Report
+
+Status: PASS/success
+Date: November 5, 2026
+Device: Windows; Node.js/npm and PostgreSQL 18.6
+Source: park-it-database-main.zip
+
+The project archive was extracted into a temporary local folder. Dependencies were installed successfully, and the supplied database schema and seed data were loaded into a disposable PostgreSQL database. The application was then started and tested to verify its basic functionality.
+
+Validation Summary: 5 checks passed, 0 failed.
+Scope: The testing confirmed that the Park-It application could be installed and executed on a separate Windows environment using a temporary project copy and a disposable PostgreSQL database. The existing PostgreSQL service and other groups' databases were not modified. The temporary testing workspace was removed after validation. This was a local installation and startup test, not a permanent installation or a test using production credentials.
