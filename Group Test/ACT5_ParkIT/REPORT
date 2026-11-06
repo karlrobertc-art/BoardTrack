@@ -1,0 +1,62 @@
+Evidence 5.1 – Database Health and Activity
+
+Screenshot Filename: A5-01_Database_Health_and_Activity.png
+
+Description of Evidence:
+
+This screenshot is intended to present the general health and current activity of the PostgreSQL database. The inspection includes the database name, PostgreSQL version, database size, available project tables, and active database sessions.
+
+The pg_stat_activity view provides information about database connections and their current states.
+
+Purpose:
+
+This evidence supports database monitoring by providing an overview of the database environment. It helps administrators understand the current database condition, identify active sessions, and review ongoing database activity.
+
+Evidence 5.2 – PostgreSQL Log Inspection
+
+Screenshot Filename: A5-02_PostgreSQL_Log_Inspection.png
+
+Description of Evidence:
+
+This screenshot is intended to document the PostgreSQL logging configuration. The inspection includes the logging collector setting, log destination, log directory, and log filename configuration.
+
+These settings help determine how PostgreSQL records database events and where its log files are stored.
+
+Purpose:
+
+The purpose of this evidence is to demonstrate the importance of database logging and monitoring. PostgreSQL logs can help administrators investigate database errors, connection problems, warnings, and other operational events.
+
+Note: Logging configuration is not the same as actual log inspection. If the activity requires actual log evidence, include a screenshot of the available log entries from the configured log directory. Do not invent errors or incidents.
+
+Evidence 5.3 – ANALYZE and VACUUM Maintenance
+
+Screenshot Filename: A5-03_Analyze_and_Vacuum_Maintenance.png
+
+Description of Evidence:
+
+This screenshot is intended to document routine PostgreSQL maintenance operations using the ANALYZE VERBOSE and VACUUM VERBOSE commands.
+
+The ANALYZE operation collects statistics about table contents. PostgreSQL uses these statistics to help its query planner select appropriate execution plans.
+
+The VACUUM operation performs routine maintenance by reclaiming reusable storage occupied by dead tuples and helping maintain database efficiency.
+
+Purpose:
+
+This evidence demonstrates the importance of regular database maintenance. Performing these operations when appropriate helps maintain database performance and supports efficient query execution.
+
+Evidence 5.4 – Query Execution Plan
+
+Screenshot Filename: A5-04_Query_Execution_Plan.png
+
+Description of Evidence:
+
+This screenshot is intended to present the execution plan of a SELECT query against the vehicle table.
+
+The EXPLAIN command provides information about how PostgreSQL plans to execute a query. When EXPLAIN ANALYZE is used, PostgreSQL also executes the SELECT query and reports actual execution information.
+
+The execution plan may contain details such as scan type, estimated rows, actual rows, and execution time.
+
+Purpose:
+
+This evidence demonstrates how query execution plans can be used to understand database performance. By examining the execution plan, administrators can identify possible performance concerns and determine whether query optimization may be necessary.
+
