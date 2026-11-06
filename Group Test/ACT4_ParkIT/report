@@ -1,0 +1,61 @@
+ACTIVITY 4 – DATABASE ACCESS CONTROL AND USER PRIVILEGE MANAGEMENT
+
+Evidence 4.1 – Database and Schema Inspection
+
+Screenshot Filename: A4-01_Database_and_Schema_Inspection.png
+
+Description of Evidence:
+
+This screenshot documents the initial inspection of the Park It Smart Parking System database using PostgreSQL. It is intended to show the active database name, connected database user, PostgreSQL version, and the existing tables under the public schema.
+
+The inspection identifies the five main database tables: parking_zone, vehicle, transaction, payment, and staff_user. It also provides information about the columns and data types defined in the database.
+
+Purpose:
+
+The purpose of this evidence is to establish the existing database structure before reviewing or configuring access privileges. Understanding the database objects is necessary when planning role permissions and determining which information should be accessible to different users.
+
+Evidence 4.2 – Role and Membership Configuration
+
+Screenshot Filename: A4-02_Role_and_Membership_Configuration.png
+
+Description of Evidence:
+
+This screenshot is intended to document the PostgreSQL roles and role memberships associated with the database server. The role inspection displays role names and important attributes, including superuser status, database creation permissions, role creation permissions, and login capability.
+
+The membership inspection identifies relationships between member roles and granted group roles.
+
+Purpose:
+
+This evidence helps the database administrator understand the existing user and role configuration. It is useful for identifying accounts with elevated privileges and determining whether role memberships follow the principle of least privilege.
+
+Note: Existing roles and memberships should be reported according to the actual query output. Proposed roles should not be described as already created.
+
+Evidence 4.3 – Privilege and Least-Privilege Verification
+
+Screenshot Filename: A4-03_Privilege_and_Least_Privilege_Verification.png
+
+Description of Evidence:
+
+This screenshot is intended to show the table-level privileges associated with the database objects in the public schema. The privilege inspection identifies the grantee, table schema, table name, and privilege type.
+
+These details help determine which users or roles have permissions to perform operations on the project's database tables.
+
+Purpose:
+
+The purpose of this evidence is to evaluate whether database access is appropriately restricted. It supports the application of the principle of least privilege by helping identify permissions that may be unnecessary for a particular role.
+
+Evidence 4.4 – Authorized and Denied Operations
+
+Screenshot Filename: A4-04_Authorized_and_Denied_Operations.png
+
+Description of Evidence:
+
+This screenshot is intended to document database access testing. The SELECT queries can demonstrate whether the connected account can retrieve records from the vehicle and parking_zone tables.
+
+Additional permission tests should use the appropriate restricted accounts to determine whether unauthorized operations, such as UPDATE or CREATE DATABASE, are rejected by PostgreSQL.
+
+Purpose:
+
+This evidence demonstrates how PostgreSQL enforces access permissions. It helps distinguish between operations allowed for a particular role and operations that should be denied because the account does not possess the required privileges.
+
+Note: Successful SELECT queries alone do not prove that restricted operations are denied. Actual permission errors must be captured separately.
