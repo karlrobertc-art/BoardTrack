@@ -1,0 +1,79 @@
+Evidence 6.1 – Backup Creation and Checksum
+
+Screenshot Filename: A6-01_Backup_Creation_and_Checksum.png
+
+Description of Evidence:
+
+This screenshot is intended to document the creation of a PostgreSQL logical backup using the pg_dump utility with the custom archive format.
+
+The backup is saved as parkit_backup.dump. The file information and SHA-256 checksum provide additional details for identifying and checking the integrity of the backup file.
+
+Purpose:
+
+This evidence demonstrates the database backup process. Creating backups is important because it provides a recovery copy that can be used if the original database becomes unavailable or its data is lost or corrupted.
+
+The checksum can help determine whether the backup file has changed since the checksum was generated. However, a checksum alone does not prove that the backup can be restored successfully.
+
+Evidence 6.2 – Backup Archive Inspection
+
+Screenshot Filename: A6-02_Backup_Archive_Inspection.png
+
+Description of Evidence:
+
+This screenshot is intended to document the inspection of the PostgreSQL custom-format backup archive using the pg_restore -l command.
+
+The archive listing identifies the database objects included in the backup, such as tables, sequences, constraints, and other available objects.
+
+Purpose:
+
+The purpose of this evidence is to confirm that the backup archive can be read and that its contents can be inspected before restoration.
+
+Inspecting the archive is an important step in validating the backup structure before attempting a recovery operation.
+
+Evidence 6.3 – Restore and Database Verification
+
+Screenshot Filename: A6-03_Restore_and_Database_Verification.png
+
+Description of Evidence:
+
+This screenshot is intended to document the restoration of the backup into a separate test database named grp_parkit_restore_test.
+
+The restored database is inspected to determine whether its tables and records are available. The verification includes checking the tables and retrieving record counts from the vehicle, parking_zone, staff_user, payment, and transaction tables.
+
+Purpose:
+
+This evidence demonstrates the database restoration process and provides an initial check of the restored database contents.
+
+Restoring into a separate test database is important because it allows the administrator to evaluate the backup without overwriting or modifying the original project database.
+
+Evidence 6.4 – Controlled Recovery Simulation
+
+Screenshot Filename: A6-04_Controlled_Recovery_Simulation.png
+
+Description of Evidence:
+
+This screenshot is intended to document the final verification of the restored test database.
+
+The verification includes identifying the active database, checking the restored tables, reviewing record counts, and inspecting foreign key constraints.
+
+These checks help determine whether the restored database contains the expected database objects and relationships.
+
+Purpose:
+
+The purpose of this evidence is to demonstrate the basic recovery validation process. It provides supporting information that the restored database can be accessed and that its important structures and relationships are present.
+
+The recovery verification is performed on the separate test database to protect the original Park It Smart Parking System database.
+
+OVERALL CONCLUSION
+
+The evidence gathered for Activities 4, 5, and 6 documents important database administration practices for the Park It Smart Parking System.
+
+Activity 4 focuses on database access control, role management, and privilege inspection. It emphasizes the importance of assigning permissions according to user responsibilities and protecting the database through the principle of least privilege.
+
+Activity 5 focuses on database health monitoring, logging, routine maintenance, and query performance analysis. These practices help administrators maintain database efficiency and identify potential operational problems.
+
+Activity 6 focuses on database backup, archive inspection, restoration, and recovery verification. These procedures are important for protecting project data and preparing for possible database failures.
+
+Together, the three activities demonstrate the importance of database security, maintenance, and recoverability in managing a reliable PostgreSQL database system.
+
+Documentation Note: Each screenshot should contain actual PostgreSQL command output or actual backup and restoration results. Any operation that was not performed or verified should be identified as pending rather than reported as successful.
