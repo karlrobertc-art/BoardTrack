@@ -1,0 +1,24 @@
+Activity — BrewPOS System Installation and Testing Report
+
+Overall Status: Passed  
+Testing Date: November 6, 2026  
+Testing Environment: Windows (PowerShell, Microsoft Build of OpenJDK 17)  
+Project Source: `brewpos-main`  
+
+Installation and Environment Verification
+
+The BrewPOS application was extracted from the provided project archive and tested in a local environment. The installation and execution process was conducted using an isolated PostgreSQL database (`grp_brewposdb`) to ensure proper backend connectivity and database schema initialization without altering unrelated configurations.
+
+The system was evaluated based on JDK pathing verification, Maven wrapper execution, database connectivity, application packaging, and local server startup.
+
+Setup Notes and Technical Observations
+
+During the installation process, the testing environment required specific environment adjustments. The default Maven wrapper batch script (`mvnw.cmd`) encountered path inheritance and environment variable translation issues when executed directly within standard PowerShell sessions on Windows. Consequently, the `JAVA_HOME` environment variable was explicitly scoped and passed alongside direct Maven build invocations to ensure correct compilation of the Spring Boot archive. 
+
+Additionally, because the application configuration initially relied on uninitialized system environment variables for database credentials, connection parameters were explicitly bound via environment variables during runtime initialization. Following these configuration adjustments, the application successfully compiled via Maven (`BUILD SUCCESS`), established a stable connection with the PostgreSQL database, and launched the internal Tomcat server on port 8081. 
+
+Conclusion
+
+The BrewPOS application successfully completed local installation, compilation, and functional execution after the required Java pathing and database connection parameters were properly configured. The system demonstrated successful database initialization, Spring Boot service startup, and local web accessibility via http://localhost:8081. The testing results confirm that the application functions reliably in a local development environment when prerequisites are explicitly defined.
+
+The remaining consideration involves the portability of the Maven wrapper script under default Windows PowerShell configurations when environment variables are not globally inherited. Ensuring explicit environment variable documentation or streamlining wrapper invocation scripts would further simplify deployment for other team members.
