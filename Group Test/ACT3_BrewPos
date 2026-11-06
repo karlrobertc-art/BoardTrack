@@ -13,9 +13,7 @@ The system was evaluated based on JDK pathing verification, Maven wrapper execut
 
 Setup Notes and Technical Observations
 
-During the installation process, the testing environment required specific environment adjustments. The default Maven wrapper batch script (`mvnw.cmd`) encountered path inheritance and environment variable translation issues when executed directly within standard PowerShell sessions on Windows. Consequently, the `JAVA_HOME` environment variable was explicitly scoped and passed alongside direct Maven build invocations to ensure correct compilation of the Spring Boot archive. 
-
-Additionally, because the application configuration initially relied on uninitialized system environment variables for database credentials, connection parameters were explicitly bound via environment variables during runtime initialization. Following these configuration adjustments, the application successfully compiled via Maven (`BUILD SUCCESS`), established a stable connection with the PostgreSQL database, and launched the internal Tomcat server on port 8081. 
+During the installation process, the testing environment required specific environment adjustments. The default Maven wrapper batch script (`mvnw.cmd`) encountered path inheritance and environment variable translation issues when executed directly within standard PowerShell sessions on Windows. Consequently, the `JAVA_HOME` environment variable was explicitly scoped and passed alongside direct Maven build invocations to ensure correct compilation of the Spring Boot archive. Additionally, because the application configuration initially relied on uninitialized system environment variables for database credentials, connection parameters were explicitly bound via environment variables during runtime initialization. Following these configuration adjustments, the application successfully compiled via Maven (`BUILD SUCCESS`), established a stable connection with the PostgreSQL database, and launched the internal Tomcat server on port 8081. 
 
 Conclusion
 
