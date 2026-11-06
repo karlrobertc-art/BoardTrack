@@ -1,0 +1,3 @@
+For this activity, we inspected the current state and structure of the CampusSafe database using PostgreSQL queries. We collected information about the database version, size, tables, active sessions, table statistics, indexes, constraints, and database objects. These checks helped us understand the database’s current condition and identify the information needed for further monitoring and maintenance.
+
+The collected outputs documented the database’s structure and activity at the time of inspection. They also provided a starting point for identifying possible performance concerns and determining appropriate maintenance actions.
