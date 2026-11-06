@@ -1,0 +1,5 @@
+Activity 4: Database Users, Roles, Privileges, and Access Control
+
+In this activity, we examined the access-control configuration of the CampusSafe PostgreSQL database. We reviewed the group roles and login accounts, checked role memberships, and inspected the privileges assigned to the database schema, tables, and sequences. We also examined the permissions of the runtime, read-only, and backup roles to understand how access is separated according to each role’s purpose.
+
+The results provided an overview of the database’s privilege configuration and helped identify whether the assigned permissions followed the principle of least privilege. The inspection also served as a basis for checking whether the accounts had the appropriate access required by the application.
