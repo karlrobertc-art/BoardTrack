@@ -1,0 +1,77 @@
+ACTIVITY 5 – DATABASE MAINTENANCE AND OPERATIONAL MONITORING
+
+Evidence 5.1 – Database Baseline
+
+Screenshot Filename: A5-01_Database_Baseline.png
+
+Description of Evidence:
+
+This screenshot documents the initial database baseline inspection of the Lost and Found System database (grp05_lostandfounddb) using PostgreSQL. It is intended to show the active database name, PostgreSQL version, total database size in megabytes, and the total count of base tables under the public schema.
+
+The inspection identifies the eight main database tables: categories, claim_images, claims, item_images, items, lost_report_images, lost_reports, and potential_matches.
+
+Purpose:
+
+The purpose of this evidence is to establish an operational baseline of the database size and schema structure before conducting routine maintenance. Tracking the initial storage size and object count provides a benchmark for monitoring future database growth and structural changes.
+
+Evidence 5.2 – Active Database Sessions
+
+Screenshot Filename: A5-02_Active_Database_Sessions.png
+
+Description of Evidence:
+
+This screenshot is intended to document the active database sessions and background processes connected to the database server from pg_stat_activity. The session inspection displays process IDs (PID), connected usernames, database names, application names, client addresses, session states, wait events, and query start timestamps.
+
+Purpose:
+
+This evidence helps the database administrator monitor active user connections and process states. It is useful for identifying idle transactions, detecting connection bottlenecks, and ensuring database availability.
+
+Evidence 5.3 – Table Size Statistics
+
+Screenshot Filename: A5-03_Table_Size_Statistics.png
+
+Description of Evidence:
+
+This screenshot is intended to show the table-level storage statistics and row estimates across the public schema using pg_stat_user_tables. The statistics inspection identifies the schema name, table name, estimated live rows, estimated dead rows, and total relation size.
+
+These details help determine the physical storage footprint of each table within the project's database.
+
+Purpose:
+
+The purpose of this evidence is to evaluate table growth and storage utilization. It supports proactive database maintenance by helping identify tables with high dead tuple counts that may require VACUUM or ANALYZE operations.
+
+Evidence 5.4 – Index Inventory
+
+Screenshot Filename: A5-04_Index_Inventory.png
+
+Description of Evidence:
+
+This screenshot is intended to document the index inventory defined across the database tables using pg_indexes. The index inspection displays the schema name, table name, index name, and the complete index definition including access methods and target columns.
+
+Purpose:
+
+This evidence demonstrates how PostgreSQL optimizes data retrieval. It helps distinguish between primary key indexes automatically created by constraints and secondary indexes created to improve query search performance.
+
+Evidence 5.5 – Constraint Inventory
+
+Screenshot Filename: A5-05_Constraint_Inventory.png
+
+Description of Evidence:
+
+This screenshot is intended to document the schema-level integrity constraints using pg_constraint. The constraint inspection identifies the table name, constraint name, and constraint type, including PRIMARY KEY, FOREIGN KEY, UNIQUE, and CHECK constraints.
+
+Purpose:
+
+The purpose of this evidence is to verify data integrity rules configured at the database level. It supports system reliability by confirming that relational connections and valid data ranges are enforced by PostgreSQL.
+
+Evidence 5.6 – Database Object Summary
+
+Screenshot Filename: A5-06_Database_Object_Summary.png
+
+Description of Evidence:
+
+This screenshot is intended to capture a high-level summary of all database object types in the public schema. The object inspection aggregates total counts for tables, views, indexes, and sequences using system catalog tables.
+
+Purpose:
+
+This evidence provides a snapshot of the total database asset inventory. It helps database administrators verify schema completeness and ensures all required database objects are accounted for during maintenance and audit reviews.
