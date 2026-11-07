@@ -1,0 +1,34 @@
+# Activity 3 — Lost and Found System Installation and Testing Report
+
+**Overall Status:** Passed  
+**Testing Date:** November 6, 2026  
+**Testing Environment:** Windows (PostgreSQL 18.6 / Command Line & SQL Shell)  
+**Project Source:** `grp05-lostandfound-main.zip`  
+
+---
+
+### Installation and Environment Verification
+
+The **Lost and Found System** application was extracted from the provided project archive (`grp05-lostandfound-main.zip`) and tested in a clean, dedicated local environment. The database installation, schema initialization, role configuration, and operational execution processes were conducted using an isolated PostgreSQL instance (`grp05_lostandfounddb`) to prevent unintended modifications to the primary development or production environments.
+
+The system was evaluated based on PostgreSQL schema creation, table catalog verification, role-based access control (RBAC) initialization, privilege grant execution, operational query execution, and security restriction enforcement.
+
+---
+
+### Setup Notes and Technical Observations
+
+During the database setup and testing process, specific environmental configurations were verified and managed:
+
+1. **Database Schema & Table Initialization:** The database instance was successfully created as `grp05_lostandfounddb` on PostgreSQL 18.6. The schema inspection confirmed the creation of all eight (8) operational tables (`categories`, `claim_images`, `claims`, `item_images`, `items`, `lost_report_images`, `lost_reports`, and `potential_matches`), encompassing 55 individual column definitions and primary/foreign key constraints.
+
+2. **User Authentication & Role Management:** Three group roles (`app_runtime_grp`, `app_readonly_grp`, and `app_backup_grp`) and two dedicated login accounts (`lostandfound_app` and `lostandfound_readonly`) were provisioned. During initial privilege testing, authentication for `lostandfound_readonly` required explicit password re-configuration (`ALTER USER lostandfound_readonly WITH PASSWORD 'readonly123';`) to establish connection sessions successfully.
+
+3. **Least-Privilege Enforcement:** Object-level grants were applied across the `public` schema. Functional testing confirmed that `app_readonly_grp` maintains strict read-only (`SELECT`) permissions, while `app_runtime_grp` retains full DML access (`SELECT`, `INSERT`, `UPDATE`, `DELETE`). Unauthorized write operations (e.g., `DELETE FROM categories`) attempted under the read-only user properly triggered system permission rejections (`ERROR: permission denied for table categories`).
+
+---
+
+### Conclusion
+
+The **Lost and Found System** database application successfully completed the documented local installation, schema inspection, and security verification procedures. The system demonstrated successful database initialization, role-based membership mapping, privilege catalog verification, authorized data retrieval, and active least-privilege access enforcement. The testing results confirm that the application and its underlying database infrastructure operate reliably in an isolated local environment when properly configured.
+
+To streamline future group deployments, it is recommended to ensure standard database user credentials and role creation scripts are fully documented in the environment deployment guides.
