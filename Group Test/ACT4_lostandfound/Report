@@ -1,0 +1,78 @@
+# ACTIVITY 4 – DATABASE ACCESS CONTROL AND USER PRIVILEGE MANAGEMENT
+
+---
+
+### Evidence 4.1 – Database and Schema Inspection
+
+**Screenshot Filename:** `A4-01_Database_and_Schema_Inspection.png` (Screenshots: `a_1.png` - `a_8.png`)
+
+#### Description of Evidence:
+This screenshot documents the comprehensive inspection of the **Lost and Found System** database (`grp05_lostandfounddb`) using PostgreSQL 18.6. It confirms the active database context, the connected administrative user (`postgres`), system version details, and the full list of eight (8) public schema tables:
+1. `categories`
+2. `claim_images`
+3. `claims`
+4. `item_images`
+5. `items`
+6. `lost_report_images`
+7. `lost_reports`
+8. `potential_matches`
+
+The metadata inspection also maps all 55 database columns, primary keys, foreign keys, and sequence defaults across the database schema.
+
+#### Purpose:
+To establish an accurate operational baseline of the database schema prior to configuring access privileges. Inspecting database tables, relationships, and attributes ensures that subsequent privilege mapping accurately aligns with functional application requirements without leaving data exposed.
+
+---
+
+### Evidence 4.2 – Role and Membership Configuration
+
+**Screenshot Filename:** `A4-02_Role_and_Membership_Configuration.png` (Screenshots: `a_9.png` and `a_10.png`)
+
+#### Description of Evidence:
+This screenshot captures the role hierarchy and group membership structure created within PostgreSQL. The inspection queried system catalogs (`pg_roles` and `pg_auth_members`) to verify:
+* **Group Roles:**
+  * `app_runtime_grp` (DML Group)
+  * `app_readonly_grp` (Read-Only Group)
+  * `app_backup_grp` (Backup Group)
+* **Login Accounts & Membership Assignments:**
+  * `lostandfound_app` $\rightarrow$ granted membership in `app_runtime_grp`
+  * `lostandfound_readonly` $\rightarrow$ granted membership in `app_readonly_grp`
+
+Attributes such as `is_superuser`, `can_login`, and `can_create_database` were verified to ensure non-administrative login roles do not possess global administrative privileges.
+
+#### Purpose:
+To implement role-based access control (RBAC). Grouping permissions simplifies database administration, prevents direct privilege assignment to individual login accounts, and maintains a strict separation of administrative vs. application execution roles.
+
+---
+
+### Evidence 4.3 – Privilege and Least-Privilege Verification
+
+**Screenshot Filename:** `A4-03_Privilege_and_Least_Privilege_Verification.png` (Screenshots: `a.png` and `a_5.png`)
+
+#### Description of Evidence:
+This screenshot documents object-level privilege assignments across the public schema using `information_schema.role_table_grants`. The catalog inspection confirms:
+* **`app_readonly_grp`:** Explicitly granted `SELECT` privileges only on all schema tables (`categories`, `claims`, `items`, `lost_reports`, etc.).
+* **`app_runtime_grp`:** Explicitly granted `SELECT`, `INSERT`, `UPDATE`, and `DELETE` (DML) privileges on schema tables and sequence usage.
+
+It further captures the execution of an unauthorized write operation (`DELETE FROM categories WHERE category_id = 1;`) while authenticated as `lostandfound_readonly`, resulting in the enforced system response:
+`ERROR: permission denied for table categories`
+
+#### Purpose:
+To audit and verify the enforcement of the **Principle of Least Privilege (PoLP)**. Demonstrating that restricted user accounts are strictly denied unauthorized data modification operations proves that security boundaries are enforced by PostgreSQL.
+
+---
+
+### Evidence 4.4 – Authorized and Denied Operations
+
+**Screenshot Filename:** `A4-04_Authorized_and_Denied_Operations.png` (Screenshot: `a_7.png`)
+
+#### Description of Evidence:
+This screenshot provides end-to-end evidence of session verification, authorized queries, and permission enforcement under the restricted login user `lostandfound_readonly`:
+1. **Session Context:** `SELECT current_user, current_database();` confirms connection as `connected_user: lostandfound_readonly` on `database_name: grp05_lostandfounddb`.
+2. **Denied Operation Evidence:** Demonstrates an attempted `DELETE` statement resulting in `ERROR: permission denied for table categories`.
+3. **Authorized Operation Evidence:** Demonstrates successful execution of read-only aggregation queries:
+   * `SELECT COUNT(*) AS category_record_count FROM public.categories;` (Returned `11`)
+   * `SELECT COUNT(*) AS report_record_count FROM public.lost_reports;` (Returned `0`)
+
+#### Purpose:
+To validate operational behavior under restricted access constraints. Capturing both successful read operations and blocked write operations in a single context proves that legitimate read functionality works seamlessly while system integrity remains protected against unauthorized modification.
