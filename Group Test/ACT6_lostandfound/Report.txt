@@ -1,0 +1,3 @@
+In this activity, we created a custom-format backup of the grp05_lostandfounddb database using PostgreSQL’s pg_dump utility. We inspected the backup archive and restored it into a separate test database (grp05_lostandfound_restore_test) to avoid affecting the original database. We then checked the restored database to verify that all expected tables (categories, claim_images, claims, item_images, items, lost_report_images, lost_reports, and potential_matches) were present.
+
+This process demonstrated the basic backup and restoration workflow and emphasized the importance of testing a backup in an isolated environment. It also highlighted the need to verify restored data, database objects, constraints, and access privileges before considering a recovery successful.
